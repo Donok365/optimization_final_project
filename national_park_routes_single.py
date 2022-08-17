@@ -3,7 +3,7 @@ import pandas as pd
 import googlemaps
 from datetime import datetime   
     
-gmaps = googlemaps.Client(key='AIzaSyC47eSIAmH4WItXGqJ6Yxn9kuj0fVvl8HA')
+gmaps = googlemaps.Client(key= '')
 
 np_dict = {}
 np_list = []
@@ -25,19 +25,22 @@ for row in csv_reader:
     
 np_filein.close()
 
-csv_write_data.append(csv_header_row)
+matrix_existing_data 
 
-#geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
+np_matrix = open('distancematrix_file.csv')
+csv_reader = csv.reader(np_matrix, delimiter=',')
 
-#now = datetime.now()
+for row in csv_reader:
+    matrix_existing_data.append(row)
+ 
+np_matrix.close()
 
-location = ('Boston', '42.36325261897069','-71.0857617716905')
+starting_location = ('Boston', '42.36325261897069','-71.0857617716905')
 
 for np in np_list:
     csv_write_row = []
-    #csv_write_row.append(np[0])
     now = datetime.now()
-    lat_long = location[1] + ',' + location[2]
+    lat_long = starting_location[1] + ',' + starting_location[2]
     np_lat_long = np[1] + ',' + np[2]
     try:
         directions_result = gmaps.directions(np_lat_long,
@@ -53,11 +56,18 @@ for np in np_list:
     except:
         dd_tuple = ("N/A", "N/A")
         csv_write_row.append(f"{dd_tuple[0]};{dd_tuple[1]}")
-    print(f"{location[0]} -> {np}")
-    csv_write_data.append(csv_write_row)
+    print(f"{starting_location[0]} -> {np}")
+    matrix_new_data = csv_write_row
 
+for rows in range(len(existing_matrix_data) + 1):
+    if rows == 0:
+        csv_write_data.append(matrix_new_data)
+    else:
+        matrix_existing_data[row - 1][0] == matrix_new_data[row - 1]
+        csv_write_data.append(matrix_existing_data)
+    
 #print(csv_write_data)
-with open('distancematrix_file_8_8_22.csv', mode='w') as matrix_file:
+with open('distancematrix_file', mode='w') as matrix_file:
     matrix_writer = csv.writer(matrix_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     for row in csv_write_data:
         matrix_writer.writerow(row)

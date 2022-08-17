@@ -3,7 +3,7 @@ import pandas as pd
 import googlemaps
 from datetime import datetime   
     
-gmaps = googlemaps.Client(key='AIzaSyC47eSIAmH4WItXGqJ6Yxn9kuj0fVvl8HA')
+gmaps = googlemaps.Client(key='')
 
 np_dict = {}
 np_list = []
@@ -26,10 +26,6 @@ for row in csv_reader:
 np_filein.close()
 
 csv_write_data.append(csv_header_row)
-
-#geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
-#now = datetime.now()
-#location = ('Kenai Fjords', '60.12834853026692', '-149.43389210329596')
 
 for np in np_list:
     csv_write_row = []
